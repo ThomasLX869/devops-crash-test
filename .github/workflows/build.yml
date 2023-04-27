@@ -20,7 +20,7 @@ jobs: #liste des jobs
           java-version: '17'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn clean compile
+        run: mvn clean install
   sonar:
     needs: build #ici on peut spécifier la dépendance entre jobs
     name: Sonar analysis
@@ -71,15 +71,15 @@ jobs: #liste des jobs
           scanMetadataReportFile: target/sonar/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  publish-snapshot:
-    needs: [ build ]
-    runs-on: [ self-hosted, Linux ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up settings.xml for GitHub Packages
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: 17
-      - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy -DskipTests
+#  publish-snapshot:
+#    needs: [ build ]
+#    runs-on: [ self-hosted, Linux ]
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up settings.xml for GitHub Packages
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: 17
+#      - name: Publish to GitHub Packages
+#        run: mvn --batch-mode deploy -DskipTests
