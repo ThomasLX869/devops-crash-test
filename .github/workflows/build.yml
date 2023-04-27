@@ -11,7 +11,7 @@ on:
 jobs: #liste des jobs
   build: #id du job
     name: #nom du job
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps: # liste des steps à executer
       - uses: actions/checkout@v3
       - name: Set up JDK 17
