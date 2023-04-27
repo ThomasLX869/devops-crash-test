@@ -47,4 +47,4 @@ jobs: #liste des jobs
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=school-by-hiit_portail-suivi-formation-2022 -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=thomaslx869
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ThomasLX869_devops-crash-test -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=thomaslx869
