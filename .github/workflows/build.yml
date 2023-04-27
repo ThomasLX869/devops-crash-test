@@ -57,30 +57,21 @@ jobs: #liste des jobs
     steps:
       - uses: actions/checkout@v3
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
+          # Disabling shallow clone is recommended for improving relevancy of reporting.
           fetch-depth: 0
+
+      # Triggering SonarQube analysis as results of it are required by Quality Gate check.
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Check the Quality Gate status.
       - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
         uses: sonarsource/sonarqube-quality-gate-action@master
-        # Force to fail step after specific time
+        # Force to fail step after specific time.
         timeout-minutes: 2
-        with:
-          scanMetadataReportFile: target/sonar/report-task.txt
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#  publish-snapshot:
-#    needs: [ build ]
-#    runs-on: [ self-hosted, Linux ]
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Set up settings.xml for GitHub Packages
-#        uses: actions/setup-java@v2
-#        with:
-#          distribution: 'adopt'
-#          java-version: 17
-#      - name: Publish to GitHub Packages
-#        run: mvn --batch-mode deploy -DskipTests
