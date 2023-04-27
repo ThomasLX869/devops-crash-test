@@ -6,7 +6,7 @@ name: Build Compile
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs: #liste des jobs
   build: #id du job
