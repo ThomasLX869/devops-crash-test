@@ -18,7 +18,7 @@ jobs: #liste des jobs
           java-version: '17'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean package
   sonar:
     needs: build #ici on peut spécifier la dépendance entre jobs
     name: Sonar analysis
